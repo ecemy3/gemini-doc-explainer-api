@@ -2,3 +2,8 @@ fastapi
 uvicorn[standard]
 pydantic
 google-genai
+pytest
+redis
+pypdf
+python-docx
+python-multipart

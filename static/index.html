@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doc Learning Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <main class="shell">
+    <header class="hero">
+      <p class="eyebrow">AI DOC EXPLAINER</p>
+      <h1>Doc Learning Studio</h1>
+      <p class="subtitle">Belge yukle, soru sor, quiz uret, flashcard olustur ve kullanici bazli ogrenme ilerlemesini takip et.</p>
+    </header>
+
+    <section class="panel auth-panel">
+      <label for="userId">User ID</label>
+      <input id="userId" type="text" placeholder="ornek: ecemm" value="ecemm" />
+      <button id="saveCreds">Unique User Olustur</button>
+      <p id="credStatus" class="muted"></p>
+    </section>
+
+    <section class="grid two">
+      <article class="panel reveal">
+        <h2>1) Belge Yukle</h2>
+        <form id="uploadForm">
+          <input id="docFile" type="file" accept=".txt,.pdf,.docx" required />
+          <button type="submit">Belgeyi Isleme Al</button>
+        </form>
+        <p class="muted">Mevcut Belge ID</p>
+        <input id="documentId" type="text" placeholder="Upload sonrasi otomatik dolar" />
+        <div id="uploadResult" class="result"></div>
+      </article>
+
+      <article class="panel reveal">
+        <h2>2) Belgeye Soru Sor</h2>
+        <form id="askForm">
+          <textarea id="askQuestion" rows="4" placeholder="Bu belgede en kritik konsept nedir?" required></textarea>
+          <button type="submit">Sor</button>
+        </form>
+        <div id="askResult" class="result"></div>
+      </article>
+    </section>
+
+    <section class="grid two">
+      <article class="panel reveal">
+        <h2>3) Quiz Uret</h2>
+        <form id="quizForm">
+          <label for="quizCount">Soru Sayisi</label>
+          <input id="quizCount" type="number" min="3" max="12" value="5" />
+          <label for="quizDifficulty">Zorluk</label>
+          <select id="quizDifficulty">
+            <option value="easy">easy</option>
+            <option value="medium" selected>medium</option>
+            <option value="hard">hard</option>
+          </select>
+          <label for="quizTopics">Odak Konular (virgulle ayir)</label>
+          <input id="quizTopics" type="text" placeholder="transformer, embedding" />
+          <button type="submit">Quiz Uret</button>
+        </form>
+        <div id="quizResult" class="result"></div>
+      </article>
+
+      <article class="panel reveal">
+        <h2>4) Flashcard Uret</h2>
+        <form id="flashForm">
+          <label for="cardCount">Kart Sayisi</label>
+          <input id="cardCount" type="number" min="5" max="30" value="10" />
+          <label for="flashTopics">Odak Konular (virgulle ayir)</label>
+          <input id="flashTopics" type="text" placeholder="api, deployment" />
+          <button type="submit">Kart Destesi Olustur</button>
+        </form>
+        <div id="flashResult" class="result"></div>
+      </article>
+    </section>
+
+    <section class="panel reveal">
+      <h2>5) Kullanici Ilerlemesi</h2>
+      <div class="row">
+        <button id="loadProgress">Ilerlemeyi Getir</button>
+      </div>
+      <div id="progressResult" class="result"></div>
+    </section>
+  </main>
+
+  <template id="quizTemplate">
+    <div class="quiz-wrap"></div>
+  </template>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
