@@ -490,6 +490,7 @@ def create_learning_router(
             context_lines.append(
                 f"[{chunk['chunk_id']}] ({chunk['source']}) {chunk['text']}"
             )
+        context_block = "\n".join(context_lines)
 
         prompt = f"""
 You are a tutoring assistant. Answer using ONLY the provided context.
@@ -506,7 +507,7 @@ Question:
 {req.question}
 
 Context:
-{"\n".join(context_lines)}
+{context_block}
 """.strip()
 
         data = _call_gemini_json(
@@ -744,6 +745,7 @@ Context:
         focus_topics = _derive_focus_topics(profile, req.focus_topics)
         topic_query = " ".join(focus_topics) if focus_topics else "key concepts"
         selected_chunks = _rank_chunks(document["chunks"], topic_query, top_k=10)
+        flashcard_context = "\n".join(chunk["text"] for chunk in selected_chunks)
 
         prompt = f"""
 You are a learning coach.
@@ -758,7 +760,7 @@ Return ONLY valid JSON:
 
 Focus topics: {", ".join(focus_topics) if focus_topics else "none"}
 Context:
-{"\n".join(chunk['text'] for chunk in selected_chunks)}
+{flashcard_context}
 """.strip()
 
         data = _call_gemini_json(
